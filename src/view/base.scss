@@ -1,0 +1,32 @@
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+@mixin inline($child){
+	display:flex;
+	&>*:nth-child(#{$child}){ 
+		flex: 1;
+	}
+}
+@mixin line-text-line($height){
+	display: flex;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 0 auto;
+	&:before,&:after{
+		display: block;
+		flex: 1;
+		content: "";
+		height: 1px;
+		border-top: 1px solid #333; 
+		margin-top: 10px; 
+	}
+	&:before{
+		margin-right: 10px;
+	}
+	&:after{
+		margin-left: 10px;
+	}
+}

@@ -1,0 +1,9 @@
+@mixin inline($child){
+	display:flex;
+	&:nth-child($child){
+		flex: 1;
+	}
+	& img{
+		padding-left: 10px;
+	}
+}
