@@ -1,8 +1,42 @@
-.left{
+$gray : #999;
+
+$border-gray : $gray;
+
+%left{
 	float: left;
 }
-.right{
+%right{
 	float: right;
+}
+%margin-center{
+	margin-left: auto;
+	margin-right: auto;
+}
+%table-cell-center{ 
+    display: table-cell;
+    line-height:1;
+    text-align: center;
+    vertical-align: middle;
+}
+%cell-right{
+	&:last-child{
+		@extend %right;
+	}
+}
+%cell-left{
+	text-align: right;
+	&:first-child{
+		@extend %left;
+	}
+}
+%cell-center{
+	text-align: center;
+	&:last-child{
+		@extend %right;
+	}
+	&:first-child{
+		@extend %left;
+	}
 }
 @mixin inline($child){
 	display:flex;
@@ -12,15 +46,13 @@
 }
 @mixin line-text-line($height){
 	display: flex;
-	padding-left: 10px;
-	padding-right: 10px;
 	margin: 0 auto;
 	&:before,&:after{
 		display: block;
 		flex: 1;
 		content: "";
 		height: 1px;
-		border-top: 1px solid #333; 
+		border-top: 1px solid $border-gray; 
 		margin-top: 10px; 
 	}
 	&:before{

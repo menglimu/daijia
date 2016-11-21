@@ -49,7 +49,6 @@
 	  },
 	  methods: {
 	    going(){
-	    	console.log(1)
 	    	this.$router.push('/Going')
 	    },
 	    inputstart(value){
