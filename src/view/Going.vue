@@ -1,12 +1,7 @@
 <style lang="scss">
 @import "./../css/base";
 #going{
-	.lm-inline{
-		display:flex;
-		padding: 0.1rem;
-	}
 	.driverInfo{
-		// @extend .lm-inline;\
 		@include inline(2);
 		padding: 0.1rem;
 		img{
@@ -15,21 +10,23 @@
 			border-radius: 50%;
 		}
 		.call{
-			margin-top: 5px;
-			width:50px;
+			@extend %clear-bg-border;
+			@extend %flex-middle;
+			width: 50px;
 			height: 50px;
+			border-radius: 50%;
+			background-color: #FFF;
 		}
 		.text-group{
 			padding-left: 5px;
 			font-size: 0.14rem;
-			
 		}
 	}
 	.content{
 		width: 80%;
 		@extend %margin-center;
 		.line{
-			@include line-text-line();
+			@extend %line-text-line;
 			color: $gray;
 			margin: 0.2rem auto;
 		}
@@ -56,7 +53,7 @@
   			<div>东风神州</div>
   			<div>399单</div>
   		</div>
-  		<btn icon="ion-alert" class="call"></btn>
+  		<btn class="call"><span class="ion-android-call"></span></btn>
   	</div>
   	<div class="content">
   		<div class="line">订单详情</div>
@@ -67,11 +64,11 @@
   		<div class="line">支付方式</div>
   		<radio :multi="true" :radioData="radio" @change="payWay=arguments[0];greet()"></radio>
   	</div>
-  	<btn class="pay" size="block">确认支付</btn>
+  	<btn class="pay" size="block" @tap="greet">确认支付</btn>
   </div>
 </template>
 <script>
-	import btn from "./../components/btn"
+	import btn from "./../components/btn1"
 	import radio from "./../components/radio"
 	export default {
 	  components: {
@@ -91,6 +88,8 @@
 	  },
 	  methods: {
 	    greet: function (event) {
+	    	this.toast.show("123")
+				// this.popMask.show()
 	    	console.log(this.payWay.length)
 	    	console.log(this.payWay)
 	    	return;

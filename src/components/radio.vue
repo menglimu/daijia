@@ -1,3 +1,9 @@
+<!-- multi 是否多选 
+    radioData 选项数组[
+                {checked:false,lable:'木有法',img:"",disabled:true,value:muyoufa},
+            ]
+    left 左对齐
+-->
 <style lang="scss">
 	@import "./../css/base";
 	.lm-radio-group{

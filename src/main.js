@@ -6,6 +6,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router.js'
 //import Home from "./daijia"
+import global from './global/global.js'
+
+global()
 
 new Vue({
 	router,

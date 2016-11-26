@@ -88,14 +88,14 @@
     min-width: .44rem;
 }
 .rd-btn.rd-btn-large {
-		font-size: .16rem;
+	font-size: .16rem;
     height: .4rem;
     min-width: .8rem;
 }
 .rd-btn.rd-btn-block {
-	display: block;
-  width: 100%;
-  height: .4rem;
+    display: block;
+    width: 100%;
+    height: .4rem;
 }
 .rd-btn.rd-btn-icon{
 	&.rd-btn-small{

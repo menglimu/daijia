@@ -1,7 +1,12 @@
 $gray : #999;
 
 $border-gray : $gray;
-
+%clear-bg-border{
+	background: none;
+	border: none;
+	border-radius: 0;
+	box-shadow:none;
+}
 %left{
 	float: left;
 }
@@ -12,6 +17,69 @@ $border-gray : $gray;
 	margin-left: auto;
 	margin-right: auto;
 }
+%trans-center-Y{
+	top: 50%;
+	transform: translateY(-50%);
+}
+%trans-center-X{
+	left: 50%;
+	transform: translateX(-50%);
+}
+%trans-center{
+	top: 50%;
+	left: 50%;
+	position: relative;
+	transform: translate(-50%,-50%);
+}
+%line-text-line{
+	display: flex;
+	align-items:center;
+	margin: 0 auto;
+	&:before,&:after{
+		display: block;
+		flex: 1;
+		content: "";
+		height: 1px;
+		border-top: 1px solid $border-gray; 
+	}
+	&:before{
+		margin-right: 10px;
+	}
+	&:after{
+		margin-left: 10px;
+	}
+}
+@mixin pos($top:0,$right: $top,$bottom: $top,$left: $right){
+	top: $top;
+	right: $right;
+	bottom: $bottom;
+	left: $left;
+}
+@mixin inline($child:null,$class:null){
+	display:flex;
+	align-items:center;
+	// 文字组默认上对齐
+	&>.text-group{
+		align-self:flex-start;
+	}
+	@each $childOne in $child {
+		@if $childOne != null{
+		  &>*:nth-child(#{$childOne}){
+		  	display: block;//兼容部分浏览器
+				flex: 1;
+			}
+	  }
+	}
+	@each $classOne in $class {
+		@if $classOne != null {
+		  &>#{$classOne}{ 
+		  	display: block;
+				flex: 1;
+			}
+	  }
+	}
+}
+
 %table-cell-middle{
     display: table-cell;
     line-height:0;
@@ -40,46 +108,5 @@ $border-gray : $gray;
 	}
 	&>*:first-child{
 		@extend %left;
-	}
-}
-@mixin inline($child:null,$class:null){
-	display:flex;
-	align-items:center;
-	&>.text-group{
-		align-self:flex-start;
-	}
-	@each $childOne in $child {
-		@if $childOne != null{
-		  &>*:nth-child(#{$childOne}){
-		  	display: block;//兼容部分浏览器
-				flex: 1;
-			}
-	  }
-	}
-	@each $classOne in $class {
-		@if $classOne != null {
-		  &>#{$classOne}{ 
-		  	display: block;
-				flex: 1;
-			}
-	  }
-	}
-}
-@mixin line-text-line(){
-	display: flex;
-	align-items:center;
-	margin: 0 auto;
-	&:before,&:after{
-		display: block;
-		flex: 1;
-		content: "";
-		height: 1px;
-		border-top: 1px solid $border-gray; 
-	}
-	&:before{
-		margin-right: 10px;
-	}
-	&:after{
-		margin-left: 10px;
 	}
 }
