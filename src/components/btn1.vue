@@ -1,3 +1,5 @@
+<!-- size：传值block为块级按钮  
+disabled：是否禁止点击，默认false,-->
 <template>
   <button class="lm-button" :class="[size?'lm-btn-'+size:'',{'disabled':disabled}]" 
   @click.stop="onClick($event)">
@@ -17,17 +19,7 @@
     padding-left:0.12rem;
     padding-right: 0.12rem;
     font-size: 0.14rem;
-    /*3种尺寸*/
-    &.lm-btn-small {
-      height: .24rem;
-      min-width: .44rem;
-      font-size: 0.12rem;
-    }
-    &.lm-btn-large {
-      font-size: .16rem;
-      height: .4rem;
-      min-width: .8rem;
-    }
+
     &.lm-btn-block {
       display: block;
       width: 100%;
