@@ -84,7 +84,7 @@ $bgcolor:#FFFFFF;
 	<div class="lm-input-row" :class="rowlist">
 		<div class="left" v-if=rowlist.left><pre>{{label}}</pre></div>
 		<div class="lm-input-box">
-			<input :type=inputType :value=value @focus="focus" @blur="blur" @input="input" :placeholder=placeholder>
+			<input :type=inputType :value=valueC @focus="focus" @blur="blur" @input="input" :placeholder=placeholder>
 			<template v-if=rowlist.clear>
 				<span v-show=clearshow @click="clear">x</span>
 			</template>
@@ -107,11 +107,10 @@ export default {
 				iconlist:[],
 				clearshow:false,
 				listshow:false,
-				inputvalue:"",
-				inputlist:"",
+				valueC: this.value,
 			}
 		},
-    props: ['type','fontcolor','color','label','value','right','list','placeholder'],
+    props: ['type','label','value','right','list','placeholder'],
     mounted(){
     	switch(this.type){
 				case "password":
@@ -145,15 +144,15 @@ export default {
     		}
     	},
     	input(){
-    		this.value = event.target.value;
-    		this.$emit('input', this.value);
+    		this.valueC = event.target.value;
+    		this.$emit('input', this.valueC);
     	},
     	taplist(index){
-    		this.value = this.list[index];
-    		this.$emit('input', this.value);
+    		this.valueC = this.list[index];
+    		this.$emit('input', this.valueC);
     	},
     	clear(){
-    		this.value="";
+    		this.valueC="";
     	},
     	password(){
     		if(this.inputType == "text"){

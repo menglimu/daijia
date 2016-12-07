@@ -1,102 +1,107 @@
-<style lang="scss">
-@import "./../css/base";
-#going{
-	.driverInfo{
-		@include inline(2);
-		padding: 0.1rem;
-		img{
-			width: 60px;
-			height: 60px;
-			border-radius: 50%;
-		}
-		.call{
-			@extend %clear-bg-border;
-			@extend %flex-middle;
-			width: 50px;
-			height: 50px;
-			border-radius: 50%;
-			background-color: #FFF;
-		}
-		.text-group{
-			padding-left: 5px;
-			font-size: 0.14rem;
-		}
-	}
-	.content{
-		width: 80%;
-		@extend %margin-center;
-		.line{
-			@extend %line-text-line;
-			color: $gray;
-			margin: 0.2rem auto;
-		}
-		.cell-right{
-			@extend %cell-right;
-			margin: 0 auto 0.1rem;
-		}
-	}
-	.pay{
-		width: 90%;
-		color: #fff;
-		margin-top: 30px;
-		@extend %margin-center;
-		background-color: red;
-	}
-}
+<style lang="scss" scoped="">
+    @import "./../css/base";
+    .lm-pick-box{
+        width: 100%;
+        // height: 3rem;
+        position: fixed;
+        bottom: 0;
+        background-color: #eee;
+        .title{
+            padding: 0.04rem;
+            @include inline(2)
+        }
+        .lm-pick-roll{
+            -webkit-mask: -webkit-linear-gradient(bottom, #debb47 50%, rgba(36, 142, 36, 0));
+            .lm-pick-roll-linear{
+                -webkit-mask: -webkit-linear-gradient(top, #debb47 50%, rgba(36, 142, 36, 0));
+                display: flex;
+                position: relative;
+                .wrapper{
+                    flex: 1;
+                    height: 1.5rem;
+                    text-align: center;
+                }
+                .wrapper>ul>li{
+                    line-height: 0.3rem;
+                    height: 0.3rem;
+                    display: block;
+                }
+                .wrapper>ul{
+                    padding: 0.6rem 0;
+                }
+                .chose-one{
+                    position: absolute;
+                    top:0.6rem;
+                    width: 100%;
+                    height: 0.3rem;
+                    border-top: 1px solid #333;
+                    border-bottom: 1px solid #333;
+                    pointer-events: none;
+                }
+            }
+        }
+    }
 </style>
 <template>
-  <div id="going">
-  <drawer v-model="drawer">123</drawer>
-  	<div class="driverInfo">
-  		<img src="../assets/logo.png"/>
-  		<div class="text-group">
-  			<div class="name">黄师傅&nbsp;&nbsp;川A123456</div>
-  			<div>东风神州</div>
-  			<div>399单</div>
-  		</div>
-  		<btn class="call"><span class="ion-android-call"></span></btn>
-  	</div>
-  	<div class="content">
-  		<div class="line">订单详情</div>
-  		<div class="cell-right">费用合计<span>8.00元</span></div>
-  		<div class="cell-right">起步价<span>8.00元</span></div>
-  		<div class="cell-right">公里费用<span>8.00元</span></div>
-  		<div class="cell-right">超时费用<span>8.00元</span></div>
-  		<div class="line">支付方式</div>
-  		<radio :multi="true" :radioData="radio" @change="payWay=arguments[0];alert()"></radio>
-  	</div>
-  	<btn class="pay" @click="greet">确认支付</btn>
-  	<picker @change="pickvalue=arguments[0];alert()" :rankNum="3" :data="provincedata"></picker>
-  </div>
+    <div class="lm-pick-box">
+        <div class="title">
+            <btn>
+                取消
+            </btn>
+            <span></span>
+            <btn>
+                确定
+            </btn>
+        </div>
+        <div class="lm-pick-roll">
+            <div class="lm-pick-roll-linear">
+                <scroll class="wrapper" ref="province" @scrollOver="provinceOver">
+                    <ul class="scroll1">
+                        <li v-for="(province , index) in pickData">
+                            {{province.name}}
+                        </li>
+                    </ul>
+                </scroll>
+                <scroll class="wrapper" ref="city" @scrollOver="cityOver">
+                    <ul class="scroll2">
+                        <li v-for="(city , index) in city">
+                            {{city.name}}
+                        </li>
+                    </ul>
+                </scroll>
+                <scroll class="wrapper" ref="district">
+                    <ul class="scroll3">
+                        <li v-for="(district , index) in district">
+                            {{district.name}}
+                        </li>
+                    </ul>
+                </scroll>
+
+                <div class="chose-one"></div>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
-	import btn from "./../components/btn1"
-	import radio from "./../components/radio"
-	import drawer from "./../components/drawer"
-	import picker from "./../components/pickerChild"
-	import scroll from "./../components/scroll"
-	export default {
-	  components: { 
-	  	btn,radio,drawer,picker,scroll
-	  },
-	  data(){
-	  	return {
-	  		radio:[
-	  			{checked:false,lable:'木有法',img:"static/img/logo.png"},
-	  			{checked:true,lable:'木有法',img:"static/img/logo.png"},
-	  			{checked:false,lable:'木有法',img:"static/img/logo.png"},
-	  		],//require()
-	  		payWay:null,
-	  		drawer:false,
-	  		pickvalue:null,
-	  		provincedata:[{
+    // import scroll from './../global/lmScroll'
+    import btn from './btn'
+    import scroll from './scroll'
+    export default {
+        components: {
+            btn,scroll
+        },
+        data(){
+            return{
+                province:[],
+                city:[],
+                district:[],
+                provinceVal:0,
+                cityVal:0,
+                districtVal:0,
+                pickData:[{
                     name:'北京市',
                     value:'1',
                     child:[
-                        {
-                        "id": "2288",
-                        "name": "东城区"
-                        },
                          
                         {
                             "id": "2051",
@@ -127,6 +132,10 @@
                                     "name": "八达岭镇"
                                 }
                             ]
+                        },
+                        {
+                        "id": "2288",
+                        "name": "东城区"
                         },
                         {
                             "id": "2301",
@@ -186,6 +195,14 @@
                     name:'北京市',
                     value:'1',
                     child:[
+                         {
+                        "id": "2288",
+                        "name": "东城区"
+                        },
+                        {
+                            "id": "2301",
+                            "name": "大兴区"
+                        },
                         {
                             "id": "2300",
                             "name": "昌平区"
@@ -267,28 +284,33 @@
                     ]
                 }
                 ]
-	  	}
-	  },
-	  mounted(){
-	  },
-	  methods: {
-	  	alert(){
-	  		console.log(this.pickvalue);
-	  		// this.messageBox.confirm('123').then(()=>{console.log(112)})
-	  	},
-	    greet: function (event) {
-	    	this.drawer = true
-	    	// this.toast.show("1234")
-	    	// this.messageBox.prompt('123').then(()=>{console.log(112312)})
-				// this.popMask.show()
-	    	// console.log(this.payWay.length)
-	    	// console.log(this.payWay)
-	    	return;
-	      // 方法内 `this` 指向 vm
-	      alert('Hello ' + this.name + '!')
-	      // `event` 是原生 DOM 事件
-	      alert(event.target.tagName)
-	    },
-	  }
-	}
+            }
+        },
+        methods:{
+            provinceOver(e){
+                this.provinceVal = Math.abs(e/this.$el.querySelector('.scroll1').childNodes[0].offsetHeight);
+                this.setCity()
+                this.setDistrict()
+                console.log(1);
+            },
+            cityOver(e){
+                this.cityVal = Math.abs(e/this.$el.querySelector('.scroll2').childNodes[0].offsetHeight);
+                this.setDistrict()
+            },
+            setCity(){
+                this.city = this.pickData[this.provinceVal].child
+                this.cityVal = 0
+                this.$refs.city.setPosition(0)
+            },
+            setDistrict(){
+                this.district = this.city[this.cityVal].child
+                this.districtVal = 0
+                this.$refs.district.setPosition(0)
+            },
+        },
+        mounted(){
+            this.setCity()
+            this.setDistrict()
+        },
+    }
 </script>

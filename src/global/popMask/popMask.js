@@ -5,13 +5,23 @@ const  mask = new maskConstructor({
     el: document.createElement('div'),
   });
 document.body.appendChild(mask.$el);
-
+const popList = []
 mask.close = function () {
   this.visible = false
 }
 
 mask.show = function (){
   this.visible = true
+}
+
+mask.push = function () {
+	popList.push(1)
+	this.visible = popList.length>0 ? true : false
+}
+
+mask.delete = function () {
+	popList.pop()
+	this.visible = popList.length>0 ? true : false
 }
 
 Vue.popMask = Vue.prototype.popMask = mask

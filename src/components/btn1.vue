@@ -1,7 +1,7 @@
-<!-- size：传值block为块级按钮  
+<!-- size：传值block为块级按钮  size?'lm-btn-'+size:'',
 disabled：是否禁止点击，默认false,-->
 <template>
-  <button class="lm-button" :class="[size?'lm-btn-'+size:'',{'disabled':disabled}]" 
+  <button class="lm-button lm-btn-block" :class="[{'disabled':disabled}]" 
   @click.stop="onClick($event)">
     <slot></slot>
   </button>
@@ -19,7 +19,7 @@ disabled：是否禁止点击，默认false,-->
     padding-left:0.12rem;
     padding-right: 0.12rem;
     font-size: 0.14rem;
-
+    margin: 0 auto;
     &.lm-btn-block {
       display: block;
       width: 100%;
@@ -41,6 +41,7 @@ disabled：是否禁止点击，默认false,-->
     background: white;
     animation: ripple 1.5s;
     animation-fill-mode: forwards;
+    pointer-events: none;
   }
   @keyframes ripple {
     from {
@@ -73,22 +74,25 @@ disabled：是否禁止点击，默认false,-->
         }
         let btn = this.$el
         let ripple = document.createElement('div')
-        let x = e.pageX - btn.offsetLeft
-        let y = e.pageY - btn.offsetTop
         ripple.classList.add('ripple-effect')
-        ripple.style.height = btn.offsetHeight + 'px'
-        ripple.style.width = btn.offsetHeight + 'px'
-        ripple.style.backgroundColor = 'rgba(#FFF, 0.4)'
-        ripple.style.left = x - (btn.offsetHeight / 2) + 'px'
-        ripple.style.top = y - (btn.offsetHeight / 2) + 'px'
+
+        // let x = e.pageX - btn.offsetLeft
+        // let y = e.pageY - btn.offsetTop
+        // ripple.style.height = btn.offsetHeight + 'px'
+        // ripple.style.width = btn.offsetHeight + 'px'
+        // ripple.style.backgroundColor = 'rgba(#FFF, 0.4)'
+        // ripple.style.left = x - (btn.offsetHeight / 2) + 'px'
+        // ripple.style.top = y - (btn.offsetHeight / 2) + 'px'
+
+        ripple.style.left = e.offsetX - 10 + 'px'
+        ripple.style.top = e.offsetY - 10 + 'px'
         btn.appendChild(ripple)
         this.ripple = ripple
         this.timer = setTimeout(() => {
           btn.removeChild(this.ripple)
-          console.log(this.ripple)
           this.ripple = false
         }, 1500)
-        this.$emit("tap")
+        this.$emit("click")
       }
     }
   }

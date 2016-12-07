@@ -11,12 +11,17 @@ toast.close = function () {
 }
 
 toast.show = function (value){
+	if (this.visible) {
+		clearInterval(this.timer)
+	}
   this.visible = true
   this.value = value
-  setTimeout(()=>{
-  	this.visible = false
-  	this.value = ''
-  },2000)
+  Vue.nextTick(()=> {
+	  this.timer = setTimeout(()=>{
+	  	this.visible = false
+	  	this.value = value
+	  },2000)
+  });
 }
 
 Vue.toast = Vue.prototype.toast = toast
