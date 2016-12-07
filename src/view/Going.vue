@@ -88,7 +88,7 @@
 	  },
 	  methods: {
 	    greet: function (event) {
-	    	this.toast.show("123")
+	    	this.toast.show("1234")
 				// this.popMask.show()
 	    	console.log(this.payWay.length)
 	    	console.log(this.payWay)

@@ -85,7 +85,6 @@ disabled：是否禁止点击，默认false,-->
         this.ripple = ripple
         this.timer = setTimeout(() => {
           btn.removeChild(this.ripple)
-          console.log(this.ripple)
           this.ripple = false
         }, 1500)
         this.$emit("tap")

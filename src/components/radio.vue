@@ -45,9 +45,9 @@
 <script>
 	import check from "./check"
 	export default {
-		components: {
-		  	check,
-		},
+	components: {
+	  	check,
+	},
     props: ["radioData","multi","left"],
     data(){
     	return {
