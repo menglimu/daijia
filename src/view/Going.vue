@@ -277,9 +277,13 @@
 	  		// this.messageBox.confirm('123').then(()=>{console.log(112)})
 	  	},
 	    greet: function (event) {
+<<<<<<< HEAD
 	    	this.drawer = true
 	    	// this.toast.show("1234")
 	    	// this.messageBox.prompt('123').then(()=>{console.log(112312)})
+=======
+	    	this.toast.show("1234")
+>>>>>>> 669a1918ec877dbc352d6d3e1e5b3e78b25404f9
 				// this.popMask.show()
 	    	// console.log(this.payWay.length)
 	    	// console.log(this.payWay)

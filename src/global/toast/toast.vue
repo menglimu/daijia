@@ -4,7 +4,10 @@
   
  //  @extend %margin-center;
 	// @extend %trans-center-X;
+<<<<<<< HEAD
   z-index: 1000;
+=======
+>>>>>>> 669a1918ec877dbc352d6d3e1e5b3e78b25404f9
 	@extend %flex-middle;
   position: absolute;
   bottom: 0.6rem;
